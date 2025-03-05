@@ -29,12 +29,12 @@ class Carte:
         return self.__couleur
 
     @classmethod
-    def VALEURS(self):
-        print(self.__VALEURS)
+    def VALEURS():
+        return Carte.__VALEURS
 
     @classmethod
-    def COULEURS(self):
-        print(self.__COULEURS)
+    def COULEURS():
+        return Carte.__COULEURS
 
     def __str__(self):
         return f"{self.__valeur} de {self.__couleur.lower()}"

@@ -1,42 +1,51 @@
 from copy import deepcopy
 from cartes import Carte
+import random
 
 
 class _ListeCartes:
     """Implémentation de la classe _ListeCartes."""
 
     def __init__(self, cartes):
-        if (not isinstance(cartes, list) or
-                not all(isinstance(carte, Carte) for carte in cartes)):
-            raise ValueError("L'objet n'est pas une liste de cartes.")
         if cartes is None:
             self.cartes = 2 * [Carte(valeur, couleur)
                                for valeur in Carte.VALEURS()
                                for couleur in Carte.COULEURS()]
+        if not isinstance(cartes, list):
+            raise TypeError("L'objet n'est pas une liste de cartes.")
+        for carte in cartes:
+            if not isinstance(carte, Carte):
+                raise TypeError(f"{carte} n'est pas une carte.")
         else:
-            self.cartes = cartes
+            self.__cartes = cartes
 
     @property
     def cartes(self):
-        return deepcopy(Carte.__cartes)
+        return deepcopy(self.__cartes)
 
     def __eq__(self, other):
         return (isinstance(other, _ListeCartes)
                 and all(carte1 == carte2
-                        for carte1 in self.cartes
-                        for carte2 in other.cartes))
+                        for carte1 in self.__cartes
+                        for carte2 in other.__cartes))
 
     def __str__(self):
-        pass
+        return "[" + ", ".join(carte.__str__() for carte in self.__cartes) + "]"
 
     def __len__(self):
-        pass
+        return len(self.__cartes)
 
     def melanger(self):
-        pass
+        random.shuffle(self.__cartes)
 
     def ajouter_carte(self, carte):
-        pass
+        if not isinstance(carte, Carte):
+            raise TypeError(f"{carte} n'est pas une carte.")
+        self.__cartes.append(carte)
 
     def retirer_carte(self, indice):
-        pass
+        if self.__len__() == 0:
+            raise ValueError("La liste de cartes est vide.")
+        if not (isinstance(indice, int) and indice > 0 and indice < self.__len__()):
+            raise ValueError(f"L'indice {indice} n'est pas valide.")
+        self.__cartes.pop(indice)
