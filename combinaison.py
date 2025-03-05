@@ -15,7 +15,7 @@ class Combinaison:
 
     @property
     def cartes(self):
-        return deepcopy(self.cartes)
+        return deepcopy(self.__cartes)
 
     def __eq__(self, other):
         return (isinstance(other, Combinaison)
@@ -24,20 +24,20 @@ class Combinaison:
                          and self.cartes == other.cartes)))
 
     def __str__(self):
-        return "(" + ", ".join([f"{carte.str()}" for carte in self.cartes]) + ")"
+        return "(" + ", ".join([f"{carte.__str__()}" for carte in self.__cartes]) + ")"
 
     def __len__(self):
-        return len(self.cartes)
+        return len(self.__cartes)
 
     def __est_brelan(self):
-        return (self.len() == 3
-                and len(set([carte.valeur for carte in self.cartes])) == 1
-                and len(set([carte.couleur for carte in self.cartes])) != 3)
+        return (self.__len__() == 3
+                and len(set([carte.valeur for carte in self.__cartes])) == 1
+                and len(set([carte.couleur for carte in self.__cartes])) != 3)
 
     def __est_carre(self):
-        return (self.len() == 4
-                and len(set([carte.valeur for carte in self.cartes])) == 1
-                and len(set([carte.couleur for carte in self.cartes])) != 4)
+        return (self.__len__() == 4
+                and len(set([carte.valeur for carte in self.__cartes])) == 1
+                and len(set([carte.couleur for carte in self.__cartes])) != 4)
 
     def est_sequence(self):
         n = self.len()
