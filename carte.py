@@ -42,10 +42,10 @@ class Carte:
     def __repr__(self):
         return f"Carte('{self.__valeur}', '{self.__couleur}')"
 
-    def __eq__(self, autre_objet):
-        return (isinstance(autre_objet, Carte)
-                and self.valeur == autre_objet.valeur
-                and self.couleur == autre_objet.couleur)
+    def __eq__(self, other):
+        return (isinstance(other, Carte)
+                and self.valeur == other.valeur
+                and self.couleur == other.couleur)
 
     def __hash__(self):
         return hash(self.__repr__())

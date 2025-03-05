@@ -6,20 +6,22 @@ class Combinaison:
     """Implémentation de la classe Combinaison."""
 
     def __init__(self, cartes):
-        if (not isinstance(cartes, tuple) or (not all(isinstance(carte, Carte)
-                                              for carte in cartes))):
-            raise ValueError("L'objet n'est pas une combinaison.")
-        self.cartes = cartes
+        if not isinstance(cartes, tuple):
+            raise TypeError("L'objet n'est pas une combinaison.")
+        for carte in cartes:
+            if not isinstance(carte, Carte):
+                raise TypeError(f"{carte} n'est pas une carte.")
+        self.__cartes = cartes
 
     @property
     def cartes(self):
         return deepcopy(self.cartes)
 
-    def __eq__(self, autre_objet):
-        return (isinstance(autre_objet, Combinaison)
-                and (self.len() + autre_objet.len() == 0
-                     or (self.est_valide() and autre_objet.est_valide()
-                         and self.cartes == autre_objet.cartes)))
+    def __eq__(self, other):
+        return (isinstance(other, Combinaison)
+                and (self.__len__() + other.__len__() == 0
+                     or (self.est_valide() and other.est_valide()
+                         and self.cartes == other.cartes)))
 
     def __str__(self):
         return "(" + ", ".join([f"{carte.str()}" for carte in self.cartes]) + ")"
@@ -27,12 +29,12 @@ class Combinaison:
     def __len__(self):
         return len(self.cartes)
 
-    def est_brelan(self):
+    def __est_brelan(self):
         return (self.len() == 3
                 and len(set([carte.valeur for carte in self.cartes])) == 1
                 and len(set([carte.couleur for carte in self.cartes])) != 3)
 
-    def est_carre(self):
+    def __est_carre(self):
         return (self.len() == 4
                 and len(set([carte.valeur for carte in self.cartes])) == 1
                 and len(set([carte.couleur for carte in self.cartes])) != 4)

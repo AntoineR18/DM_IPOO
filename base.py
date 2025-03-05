@@ -7,7 +7,7 @@ class _ListeCartes:
 
     def __init__(self, cartes):
         if (not isinstance(cartes, list) or
-            not all(isinstance(carte, Carte) for carte in cartes)):
+                not all(isinstance(carte, Carte) for carte in cartes)):
             raise ValueError("L'objet n'est pas une liste de cartes.")
         if cartes is None:
             self.cartes = 2 * [Carte(valeur, couleur)
@@ -20,8 +20,23 @@ class _ListeCartes:
     def cartes(self):
         return deepcopy(Carte.__cartes)
 
-    def __eq__(self, autre_objet):
-        return (isinstance(autre_objet, _ListeCartes)
-                and all(carte1 == carte2 
+    def __eq__(self, other):
+        return (isinstance(other, _ListeCartes)
+                and all(carte1 == carte2
                         for carte1 in self.cartes
-                        for carte2 in autre_objet.cartes))
+                        for carte2 in other.cartes))
+
+    def __str__(self):
+        pass
+
+    def __len__(self):
+        pass
+
+    def melanger(self):
+        pass
+
+    def ajouter_carte(self, carte):
+        pass
+
+    def retirer_carte(self, indice):
+        pass
