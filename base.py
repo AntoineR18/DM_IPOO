@@ -19,6 +19,8 @@ class _ListeCartes:
         else:
             self.__cartes = cartes
 
+
+
     @property
     def cartes(self):
         return deepcopy(self.__cartes)
