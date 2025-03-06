@@ -56,22 +56,23 @@ class Combinaison:
         return self.__est_brelan() or self.__est_carre() or self.est_sequence()
 
     def calcule_nombre_points(self):
-        # if not self.est_valide():
-        #     raise ValueError("La combinaison n'est pas valide.")
-        # points = ({valeur: int(valeur) for valeur in Carte.VALEURS()[1:10]} +
-        #           {valeur: 10 for valeur in Carte.VALEURS()[10:]} + {'As': 10})
-        # if self.__est_brelan():
-        #     return 3*points[self.__cartes[0]]
-        # elif self.__est_carre():
-        #     return 4*points[self.__cartes[0]]
-        # else:
-        #     res = 0
-        #     if 'As' in self.cartes and '2' in self.cartes:
-        #         for carte in self.cartes:
-        #             res += points[carte]
-        #         return res + 1
-        #     else:
-        #         for carte in self.cartes:
-        #             res += points[carte]
-        #         return res
-        pass
+        if not self.est_valide():
+            raise ValueError("La combinaison n'est pas valide.")
+        points = ({valeur: int(valeur) for valeur in Carte.VALEURS()[1:10]} +
+                  {valeur: 10 for valeur in Carte.VALEURS()[10:]} + {'As': 10})
+        if self.__est_brelan():
+            return 3*points[self.__cartes[0]]
+        elif self.__est_carre():
+            return 4*points[self.__cartes[0]]
+        else:
+            res = 0
+            if 'As' in self.__cartes and '2' in self.__cartes:
+                for carte in self.__cartes:
+                    if carte.valeur == 'As':
+                        res += 1
+                    res += points[carte]
+                return res
+            else:
+                for carte in self.__cartes:
+                    res += points[carte]
+                return res

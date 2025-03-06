@@ -1,5 +1,5 @@
 from copy import deepcopy
-from cartes import Carte
+from carte import Carte
 import random
 
 
@@ -18,8 +18,6 @@ class _ListeCartes:
                 raise TypeError(f"{carte} n'est pas une carte.")
         else:
             self.__cartes = cartes
-
-
 
     @property
     def cartes(self):
