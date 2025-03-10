@@ -3,7 +3,13 @@ from carte import Carte
 
 
 class Combinaison:
-    """Implémentation de la classe Combinaison."""
+    """
+    Implémentation de la classe Combinaison.
+
+    Parameters
+    ----------
+    cartes : tuple[Carte]
+    """
 
     def __init__(self, cartes):
         if not isinstance(cartes, tuple):
@@ -30,16 +36,73 @@ class Combinaison:
         return len(self.__cartes)
 
     def __est_brelan(self):
+        """
+        La méthode privée est_brelan() détermine si la combinaison est un brelan.
+        Une combinaison est un brelan si et seulement si :
+        1. la combinaison est constituée de trois cartes,
+        2. les trois cartes ont la même valeur, et
+        3. les trois cartes ont des couleurs toutes différentes les unes des autres
+
+        Parameters
+        ----------
+        self : Combinaison
+            combinaison de cartes à tester
+
+        Returns
+        -------
+        bool
+
+        Examples # A FAIRE PLUS TARD
+        --------
+        """
         return (self.__len__() == 3
                 and len(set([carte.valeur for carte in self.__cartes])) == 1
                 and len(set([carte.couleur for carte in self.__cartes])) != 3)
 
     def __est_carre(self):
+        """
+        La méthode privée est_carre() détermine si la combinaison est un carré.
+        Une combinaison est un carré si et seulement si :
+        1. la combinaison est constituée de quatre cartes,
+        2. les quatre cartes ont la même valeur, et
+        3. les quatre cartes ont des couleurs toutes différentes les unes des autres.
+
+        Parameters
+        ----------
+        self : Combinaison
+            combinaison de cartes à tester
+
+        Returns
+        -------
+        bool
+
+        Examples # A FAIRE PLUS TARD
+        --------
+        """
         return (self.__len__() == 4
                 and len(set([carte.valeur for carte in self.__cartes])) == 1
                 and len(set([carte.couleur for carte in self.__cartes])) != 4)
 
     def est_sequence(self):
+        """
+        La méthode publique est_sequence() détermine si la combinaison est une séquence.
+        Une combinaison est une séquence si et seulement si :
+        1. la combinaison est constituée d'au moins trois cartes,
+        2. toutes les cartes ont la même couleur, et
+        3. toutes les cartes se suivent
+
+        Parameters
+        ----------
+        self : Combinaison
+            combinaison de cartes à tester
+
+        Returns
+        -------
+        bool
+
+        Examples # A FAIRE PLUS TARD
+        --------
+        """
         n = self.__len__()
         if n < 3:
             return False
@@ -53,9 +116,42 @@ class Combinaison:
                        for i in range(1, len(Carte.VALEURS())-n))
 
     def est_valide(self):
+        """
+        La méthode publique est_valide() détermine si la combinaison est valide.
+        Une combinaison est valide si et seulement si c'est soit un brelan,
+        soit un carré, soit une séquence.
+
+        Parameters
+        ----------
+        self : Combinaison
+            combinaison de cartes à tester pour savoir si elle est valide
+
+        Returns
+        -------
+        bool
+
+        Examples # A FAIRE PLUS TARD
+        --------
+        """
         return self.__est_brelan() or self.__est_carre() or self.est_sequence()
 
     def calcule_nombre_points(self):
+        """
+        La méthode publique calcule_nombre_points() calcule et renvoie le nombre
+        de points d'une combinaison valide.
+
+        Parameters
+        ----------
+        self : Combinaison
+            combinaison de cartes à partir de laquelle on calcule un nombe de points
+
+        Returns
+        -------
+        int
+
+        Examples # A FAIRE PLUS TARD
+        --------
+        """
         if not self.est_valide():
             raise ValueError("La combinaison n'est pas valide.")
         points = ({valeur: int(valeur) for valeur in Carte.VALEURS()[1:10]} +

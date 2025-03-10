@@ -1,21 +1,34 @@
 class Carte:
-    """Implémentation de la classe Carte.
+    """
+    Implémentation de la classe Carte.
 
     Parameters
     ----------
-    Examples
+    VALEURS : tuple[str]
+        différentes valeurs que peuvent prendre les cartes
+
+    COULEURS : tuple[str]
+        différentes couleurs que peuvent prendre les cartes
+
+    valeur : str
+        valeur de la carte
+
+    couleur : str
+        couleur de la carte
+
+    Examples # A FAIRE PLUS TARD
     --------
     """
 
     __VALEURS = ('As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Dame',
                  'Roi')
 
-    __COULEURS = ('Pique', 'Carreau', 'Coeur', 'Trêfle')
+    __COULEURS = ('Pique', 'Carreau', 'Coeur', 'Trèfle')
 
     def __init__(self, valeur, couleur):
-        if valeur not in self.__VALEURS:
+        if valeur not in Carte.__VALEURS:
             raise ValueError("La valeur de la carte n'existe pas.")
-        if couleur not in self.__COULEURS:
+        if couleur not in Carte.__COULEURS:
             raise ValueError("La couleur de la carte n'existe pas.")
         self.__valeur = valeur
         self.__couleur = couleur

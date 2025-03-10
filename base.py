@@ -4,7 +4,13 @@ import random
 
 
 class _ListeCartes:
-    """Implémentation de la classe _ListeCartes."""
+    """
+    Implémentation de la classe _ListeCartes.
+
+    Parameters #j'ai juste ajouté ça
+    ----------
+    cartes : list[Carte]
+    """
 
     def __init__(self, cartes):
         if cartes is None:
@@ -36,14 +42,48 @@ class _ListeCartes:
         return len(self.__cartes)
 
     def melanger(self):
+        """
+        La méthode publique melanger() permet de mélanger les cartes.
+
+        Parameters
+        ----------
+        self : _ListeCartes
+
+        """
         random.shuffle(self.__cartes)
 
     def ajouter_carte(self, carte):
+        """
+        La méthode publique ajouter_carte() permet d'ajouter une carte à la fin
+        de la liste de cartes.
+
+        Parameters
+        ----------
+        self : _ListeCartes
+            liste de carte à laquelle on ajoute une carte
+
+        carte : Carte
+            carte qu'on ajoute à notre liste de cartes
+
+        """
         if not isinstance(carte, Carte):
             raise TypeError(f"{carte} n'est pas une carte.")
         self.__cartes.append(carte)
 
     def retirer_carte(self, indice):
+        """
+        La méthode publique retirer_carte() permet de retirer une carte de la
+        liste de cartes et de la renvoyer.
+
+        Parameters
+        ----------
+        self : _ListeCartes
+            liste de cartes dans laquelle on retire une carte
+
+        indice : int
+            position de la carte retirée dans la liste de cartes
+
+        """
         if self.__len__() == 0:
             raise ValueError("La liste de cartes est vide.")
         if not (isinstance(indice, int) and indice > 0 and indice < self.__len__()):

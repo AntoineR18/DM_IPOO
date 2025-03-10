@@ -3,12 +3,39 @@ from main import Main
 
 
 class Reserve(_ListeCartes):
-    """Implémentation de la classe Reserve."""
+    """
+    Implémentation de la classe Reserve.
+
+    Parameters
+    ----------
+    cartes : _ListeCartes
+        liste des cartes dans la réserve
+    """
 
     def __init__(self, cartes):
         super().__init__(cartes)
 
     def distribuer(self, n_joueurs, idx_premier_joueur, n_cartes):
+        """
+        La méthode publique distribuer() de la classe Reserve permet de
+        distribuer les cartes aux joueur·euse·s en début de partie.
+
+        Parameters
+        ----------
+        n_joueurs : int
+            nombre de joueurs
+
+        idx_premier_joueur : int
+            indice du premier joueur
+
+        n_cartes : int
+            nombre de cartes à distribuer
+
+        Returns
+        -------
+        list[Main]
+            liste des mains de chaque joueur
+        """
         if not (isinstance(n_joueurs, int) and
                 n_joueurs >= 2 and n_joueurs <= 5):
             raise ValueError(f"{n_joueurs} doit être un entier compris entre 2 et 5.")
