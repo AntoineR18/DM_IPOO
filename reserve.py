@@ -63,3 +63,4 @@ class Reserve(_ListeCartes):
                 i += 1
         mains[idx_premier_joueur].piocher(self.__cartes)
         return mains
+# je déteste ce DM
