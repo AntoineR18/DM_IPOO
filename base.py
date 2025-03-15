@@ -7,7 +7,7 @@ class _ListeCartes:
     """
     Implémentation de la classe _ListeCartes.
 
-    Parameters #j'ai juste ajouté ça
+    Parameters
     ----------
     cartes : list[Carte]
     """
