@@ -109,7 +109,7 @@ class Combinaison:
         if len(set([carte.valeur for carte in self.__cartes])) != 1:
             return False
         indices_combi = [Carte.VALEURS().index(carte.valeur) for carte in self.__cartes]
-        indices_combi.sort()
+        indices_combi.sort()  # normalement ça a changé
         return all(indices_combi[i]+1 == indices_combi[i+1] for i in range(0, n-1))
 
     def est_valide(self):

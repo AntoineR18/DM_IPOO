@@ -23,7 +23,7 @@ class Carte:
     __VALEURS = ('As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Dame',
                  'Roi')
 
-    __COULEURS = ('Pique', 'Carreau', 'Coeur', 'Trèfle')
+    __COULEURS = ('Pique', 'Carreau', 'Coeur', 'Trêfle')
 
     def __init__(self, valeur, couleur):
         if valeur not in Carte.__VALEURS:
