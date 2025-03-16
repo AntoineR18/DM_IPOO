@@ -11,26 +11,25 @@ import re
 import pytest
 from carte import Carte
 
-# test d'erreur
+# test d'erreur dans l'initialisation de la classe Carte
 
 
 @pytest.mark.parametrize(
     "params, erreur, message_erreur",
     [
         (
-            {"valeur": "escalier", "couleur": "Trêfle"},
+            {"valeur": "procrastiner_le_DM_d_IPOO", "couleur": "Trêfle"},
             ValueError,
-            "La valeur de la carte n'existe pas."
+            "La valeur de la carte n existe pas."
         ),
         (
-            {"valeur": "2", "param2": "coeur"},
-            # parce que coeur doit avoir une majuscule
+            {"valeur": "2", "couleur": "coeur"},
             ValueError,
-            "La couleur de la carte n'existe pas."
+            "La couleur de la carte n existe pas."
         )
     ]
 )
-def test_Carte_parametres(params, erreur, message_erreur):
+def test_Carte_initialisation_parametres(params, erreur, message_erreur):
     # je suis pas du tout sûre de cette manière de faire des test parce que
     # c'est un truc qui check le fonctionnement de fonctions de base
     with pytest.raises(erreur, match=re.escape(message_erreur)):

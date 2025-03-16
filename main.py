@@ -6,10 +6,11 @@ class Main(_ListeCartes):
     """
     Implémentation de la classe Main.
 
-    Parameters
+    Attributes
     ----------
     cartes : _ListeCartes
         liste des cartes dans la main du joueur
+
     """
 
     def __init__(self, cartes):
@@ -27,12 +28,13 @@ class Main(_ListeCartes):
 
         Parameters
         ----------
-        self : _ListeCartes
+        self : Main
             liste des cartes dans la main du joueur à laquelle on ajoute la
             carte piochée
 
-        reserve : _ListeCartes
+        reserve : Reserve
             liste des cartes dans la réserve à laquelle on enlève la carte piochée
+
         """
         carte = reserve.retirer_carte(reserve.__len__()-1)
         self.__cartes.ajouter_carte(carte)
@@ -45,15 +47,16 @@ class Main(_ListeCartes):
 
         Parameters
         ----------
-        self : _ListeCartes
+        self : Main
             liste des cartes dans la main du joueur à laquelle on retire la carte jetée
 
         indice : int
             indice de la carte jetée
 
-        defausse : _ListeCartes
+        defausse : Defausse
             liste des cartes de la défausse à la fin de laquelle on ajoute la
             carte jetée
+
         """
         if not (indice > 0 and indice < self.__len__()):
             raise ValueError(f"L'indice {indice} doit être un entier positif "
@@ -67,7 +70,7 @@ class Main(_ListeCartes):
 
         Parameters
         ----------
-        self : _ListeCartes
+        self : Main
             liste des cartes dans la main du joueur d'où on tire la combinaison à poser
 
         indices_combinaisons : list[list[int]]
@@ -80,6 +83,7 @@ class Main(_ListeCartes):
         Returns
         -------
         (list[Combinaison], int)
+
         """
         occurrences = {}
         combinaisons = []

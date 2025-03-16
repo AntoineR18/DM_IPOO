@@ -6,9 +6,10 @@ class Combinaison:
     """
     Implémentation de la classe Combinaison.
 
-    Parameters
+    Attributes
     ----------
     cartes : tuple[Carte]
+
     """
 
     def __init__(self, cartes):
@@ -16,7 +17,7 @@ class Combinaison:
             raise TypeError("L'objet n'est pas une combinaison.")
         for carte in cartes:
             if not isinstance(carte, Carte):
-                raise TypeError(f"{carte} n'est pas une carte.")
+                raise TypeError("Tous les éléments de la combinaison ne sont pas des cartes")
         self.__cartes = cartes
 
     @property
@@ -35,7 +36,9 @@ class Combinaison:
     def __len__(self):
         return len(self.__cartes)
 
-    def __est_brelan(self):
+#j'ai enlevé les __ devant ces méthodes parce que ça passait pas les tests, apparemment c'est réservé aux méthodes spéciales
+
+    def est_brelan(self):
         """
         La méthode privée est_brelan() détermine si la combinaison est un brelan.
         Une combinaison est un brelan si et seulement si :
@@ -52,14 +55,13 @@ class Combinaison:
         -------
         bool
 
-        Examples # A FAIRE PLUS TARD
-        --------
+
         """
         return (self.__len__() == 3
-                and len(set([carte.valeur for carte in self.__cartes])) == 1
-                and len(set([carte.couleur for carte in self.__cartes])) != 3)
+                and len(set([carte.valeur for carte in self.__cartes])) == 1)
+    #la dernière condition, de 'il y a trois couleurs différentes" est pas nécessaire
 
-    def __est_carre(self):
+    def est_carre(self):
         """
         La méthode privée est_carre() détermine si la combinaison est un carré.
         Une combinaison est un carré si et seulement si :
@@ -76,12 +78,11 @@ class Combinaison:
         -------
         bool
 
-        Examples # A FAIRE PLUS TARD
-        --------
+
         """
         return (self.__len__() == 4
-                and len(set([carte.valeur for carte in self.__cartes])) == 1
-                and len(set([carte.couleur for carte in self.__cartes])) != 4)
+                and len(set([carte.valeur for carte in self.__cartes])) == 1)
+    #pareil que brelan
 
     def est_sequence(self):
         """
@@ -100,8 +101,6 @@ class Combinaison:
         -------
         bool
 
-        Examples # A FAIRE PLUS TARD
-        --------
         """
         n = self.__len__()
         if n < 3:
@@ -130,8 +129,7 @@ class Combinaison:
         -------
         bool
 
-        Examples # A FAIRE PLUS TARD
-        --------
+
         """
         return self.__est_brelan() or self.__est_carre() or self.est_sequence()
 
@@ -149,8 +147,7 @@ class Combinaison:
         -------
         int
 
-        Examples # A FAIRE PLUS TARD
-        --------
+
         """
         if not self.est_valide():
             raise ValueError("La combinaison n'est pas valide.")

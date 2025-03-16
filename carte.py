@@ -2,7 +2,7 @@ class Carte:
     """
     Implémentation de la classe Carte.
 
-    Parameters
+    Attributes
     ----------
     VALEURS : tuple[str]
         différentes valeurs que peuvent prendre les cartes
@@ -16,20 +16,12 @@ class Carte:
     couleur : str
         couleur de la carte
 
-    Examples # A FAIRE PLUS TARD
-    --------
     """
-
-    __VALEURS = ('As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Dame',
-                 'Roi')
-
-    __COULEURS = ('Pique', 'Carreau', 'Coeur', 'Trèfle')
-
     def __init__(self, valeur, couleur):
-        if valeur not in Carte.__VALEURS:
-            raise ValueError("La valeur de la carte n'existe pas.")
-        if couleur not in Carte.__COULEURS:
-            raise ValueError("La couleur de la carte n'existe pas.")
+        if valeur not in Carte.VALEURS():
+            raise ValueError("La valeur de la carte n existe pas.")
+        if couleur not in Carte.COULEURS():
+            raise ValueError("La couleur de la carte n existe pas.")
         self.__valeur = valeur
         self.__couleur = couleur
 
@@ -42,12 +34,13 @@ class Carte:
         return self.__couleur
 
     @classmethod
-    def VALEURS():
-        return Carte.__VALEURS
+    def VALEURS(cls):
+        return ['As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Dame',
+                 'Roi']
 
     @classmethod
-    def COULEURS():
-        return Carte.__COULEURS
+    def COULEURS(cls):
+        return ['Pique', 'Carreau', 'Coeur', 'Trêfle']
 
     def __str__(self):
         return f"{self.__valeur} de {self.__couleur.lower()}"

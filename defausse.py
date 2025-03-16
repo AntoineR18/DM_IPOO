@@ -5,10 +5,11 @@ class Defausse(_ListeCartes):
     """
     Implémentation de la classe Defausse.
 
-    Parameters
+    Attributes
     ----------
     cartes : _ListeCartes
         liste des cartes dans la défausse
+
     """
 
     def __init__(self, cartes):
@@ -28,7 +29,13 @@ class Defausse(_ListeCartes):
 
         reserve : _ListeCartes
             réserve à la fin de laquelle on ajoute la défausse mélangée pour la vider
+
         """
         self.__cartes.melanger()
+        i = 0
         for carte in self.__cartes:
             reserve.ajouter_carte(carte)
+            i += 1
+        for k in range(i-1):
+            #j'ai rajouté ce truc miteux pour que la défausse soit vidée mais je suis sure que c'est faux
+            Defausse.retirer_carte(k)

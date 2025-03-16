@@ -7,9 +7,10 @@ class _ListeCartes:
     """
     Implémentation de la classe _ListeCartes.
 
-    Parameters #j'ai juste ajouté ça
+    Attributes
     ----------
     cartes : list[Carte]
+
     """
 
     def __init__(self, cartes):
