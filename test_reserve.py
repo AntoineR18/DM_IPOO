@@ -67,9 +67,6 @@ def test_reserve_distribuer_erreur(
         reserve.distribuer(n_joueurs, idx_premier_joueur, n_cartes)
 
 
-# ---- A FAIRE ----
-
-
 @pytest.mark.parametrize(
     "param, n_joueurs, idx_premier_joueur, n_cartes, n_cartes_attendues",
     [
@@ -85,6 +82,18 @@ def test_reserve_distribuer_erreur(
             "14/15",
             [14, 15, 14],
         ),
+        (
+            [
+                Carte(valeur, couleur)
+                for valeur in Carte.VALEURS()
+                for couleur in Carte.COULEURS()
+            ]
+            * 2,
+            4,
+            0,
+            "13/14",
+            [14, 13, 13, 13],
+        ),
     ],
 )
 def test_reserve_distribuer_resultat(
@@ -93,6 +102,3 @@ def test_reserve_distribuer_resultat(
     reserve = Reserve(param)
     mains = reserve.distribuer(n_joueurs, idx_premier_joueur, n_cartes)
     assert [main.__len__() for main in mains] == n_cartes_attendues
-
-
-# -----------------

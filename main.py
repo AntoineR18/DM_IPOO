@@ -16,9 +16,9 @@ class Main(_ListeCartes):
         super().__init__(cartes)
 
     def __eq__(self, other):
-        return isinstance(other, Main) and all(
-            carte in other.cartes for carte in self.__cartes
-        )
+        if isinstance(other, Main):
+            return set(self.cartes) == set(other.cartes)
+        return False
 
     def piocher(self, reserve):
         """
@@ -35,6 +35,8 @@ class Main(_ListeCartes):
         reserve : Reserve
             liste des cartes dans la réserve à laquelle on enlève la carte piochée
         """
+        if reserve.__len__() == 0:
+            raise ValueError("La réserve est vide, impossible de piocher une carte.")
         carte = reserve.retirer_carte(0)
         self.ajouter_carte(carte)
 
@@ -58,10 +60,10 @@ class Main(_ListeCartes):
         """
         if not (indice > 0 and indice < self.__len__()):
             raise ValueError(
-                f"L'indice {indice} doit être un entier positif "
-                "inférieur à la longueur de la main."
+                "L'indice doit être un entier positif inférieur à la longueur"
+                " de la main."
             )
-        carte = self.__cartes.retirer_carte(indice)
+        carte = self.retirer_carte(indice)
         defausse.ajouter_carte(carte)
 
     def poser(self, indices_combinaisons, premiere_pose):
@@ -84,30 +86,43 @@ class Main(_ListeCartes):
         -------
         (list[Combinaison], int)
         """
-        occurrences = {}
+        n = self.__len__()
+        occurrences = {i: False for i in range(0, n)}
         combinaisons = []
         points = 0
         for liste in indices_combinaisons:
-            combi = Combinaison()
+            combi_cartes = []
             for i in liste:
-                if not (isinstance(i, int) and i >= 0 and i < self.__cartes.__len__()):
+                if not (isinstance(i, int) and i >= 0 and i < n):
                     raise ValueError(
                         f"L'indice {i} doit être un entier positif "
                         "strictement inférieur au nombre de cartes "
                         "dans la main."
                     )
                 if occurrences[i]:
-                    raise ValueError(f"La carte d'indice {i} est posée deux fois.")
+                    raise ValueError(
+                        f"La carte {self.cartes[i].__str__()} ne peut être posée qu'une"
+                        " seule fois."
+                    )
                 else:
                     occurrences[i] = True
-                carte = self.__cartes.retirer_carte(i)
-                combi.ajouter_carte(carte)
+                combi_cartes.append(self.cartes[i])
+            combi = Combinaison(tuple(combi_cartes))
             if not combi.est_valide():
-                raise ValueError(f"La combinaison {combi} n'est pas valide.")
+                raise ValueError(f"La combinaison {combi.__str__()} n'est pas valide.")
             combinaisons.append(combi)
-            points += combi.calcul_nombre_points()
+            points += combi.calcule_nombre_points()
         if premiere_pose:
             if not any(combi.est_sequence() for combi in combinaisons):
-                raise ValueError("La première pose doit contenir une séquence.")
-            assert points >= 51, "La première pose doit rapporter au moins 51 points."
+                raise ValueError(
+                    "La première pose doit contenir au moins une séquence."
+                )
+            if points < 51:
+                raise ValueError("La première pose doit rapporter au moins 51 points.")
+        tous_les_indices = sum(indices_combinaisons, [])
+        tous_les_indices.reverse()
+        print(tous_les_indices)
+        for indice in tous_les_indices:
+            self.retirer_carte(indice)
+        print(self)
         return combinaisons, points

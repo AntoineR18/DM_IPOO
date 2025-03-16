@@ -61,11 +61,13 @@ class Reserve(_ListeCartes):
         while mains[idx_premier_joueur].__len__() < n:
             i = idx_premier_joueur
             while i < n_joueurs:
-                mains[i].piocher(self.cartes)
+                type(mains[i])
+                mains[i].piocher(self)
                 i += 1
             i = 0
             while i < idx_premier_joueur:
-                mains[i].piocher(self.cartes)
+                type(mains[i])
+                mains[i].piocher(self)
                 i += 1
-        mains[idx_premier_joueur].piocher(self.cartes)
+        mains[idx_premier_joueur].piocher(self)
         return mains

@@ -75,36 +75,75 @@ def test_combinaison_init_succes(cartes, combinaison_attendue):
     assert combinaison.cartes == combinaison_attendue.cartes
 
 
-# ---- A FAIRE ----
-
-# @pytest.mark.parametrize(
-#     "comb1, comb2, resultat_attendu",
-#     [
-#         ((), (), True),
-#         ((pytest.as_coeur,), (pytest.as_coeur,), True),
-#         (
-#             (pytest.as_coeur, pytest.six_pique),
-#             (pytest.as_coeur, pytest.six_pique),
-#             True,
-#         ),
-#         (
-#             (pytest.as_coeur, pytest.six_pique, pytest.trois_carreau),
-#             (pytest.as_coeur, pytest.six_pique, pytest.trois_carreau),
-#             True,
-#         ),
-#         ((pytest.as_coeur), (), False),
-#         ((pytest.as_coeur), (pytest.as_trefle), False),
-#         (
-#             (pytest.as_coeur, pytest.six_pique, pytest.trois_carreau),
-#             (pytest.as_coeur, pytest.trois_carreau, pytest.six_pique),
-#             False,
-#         ),
-#     ],
-# )
-# def test_combinaison_eq(comb1, comb2, resultat_attendu):
-#     assert (Combinaison(comb1) == Combinaison(comb2)) == resultat_attendu
-
-# -----------------
+# a refaire si possible
+@pytest.mark.parametrize(
+    "comb1, comb2, resultat_attendu",
+    [
+        ((), (), True),
+        (
+            (
+                pytest.deux_coeur,
+                pytest.trois_coeur,
+                pytest.quatre_coeur,
+                pytest.as_coeur,
+            ),
+            (
+                pytest.deux_coeur,
+                pytest.trois_coeur,
+                pytest.quatre_coeur,
+                pytest.as_coeur,
+            ),
+            True,
+        ),
+        (
+            (
+                pytest.deux_coeur,
+                pytest.trois_coeur,
+                pytest.quatre_coeur,
+                pytest.cinq_coeur,
+            ),
+            (
+                pytest.deux_coeur,
+                pytest.trois_coeur,
+                pytest.quatre_coeur,
+                pytest.cinq_coeur,
+            ),
+            True,
+        ),
+        (
+            (
+                pytest.deux_coeur,
+                pytest.trois_coeur,
+                pytest.quatre_coeur,
+                pytest.as_coeur,
+            ),
+            (
+                pytest.deux_coeur,
+                pytest.trois_coeur,
+                pytest.quatre_coeur,
+                pytest.cinq_coeur,
+            ),
+            False,
+        ),
+        (
+            (
+                pytest.deux_coeur,
+                pytest.trois_coeur,
+                pytest.quatre_coeur,
+                pytest.as_coeur,
+            ),
+            (
+                pytest.trois_coeur,
+                pytest.quatre_coeur,
+                pytest.as_coeur,
+                pytest.deux_coeur,
+            ),
+            True,
+        ),
+    ],
+)
+def test_combinaison_eq(comb1, comb2, resultat_attendu):
+    assert (Combinaison(comb1) == Combinaison(comb2)) == resultat_attendu
 
 
 @pytest.mark.parametrize(

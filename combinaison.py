@@ -27,7 +27,9 @@ class Combinaison:
         return isinstance(other, Combinaison) and (
             self.__len__() + other.__len__() == 0
             or (
-                self.est_valide() and other.est_valide() and self.cartes == other.cartes
+                self.est_valide()
+                and other.est_valide()
+                and set(self.cartes) == set(other.cartes)
             )
         )
 
