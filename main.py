@@ -10,15 +10,15 @@ class Main(_ListeCartes):
     ----------
     cartes : _ListeCartes
         liste des cartes dans la main du joueur
-
     """
 
     def __init__(self, cartes):
         super().__init__(cartes)
 
     def __eq__(self, other):
-        return (isinstance(other, Main) and
-                all(carte in other.cartes for carte in self.__cartes))
+        return isinstance(other, Main) and all(
+            carte in other.cartes for carte in self.__cartes
+        )
 
     def piocher(self, reserve):
         """
@@ -34,10 +34,9 @@ class Main(_ListeCartes):
 
         reserve : Reserve
             liste des cartes dans la réserve à laquelle on enlève la carte piochée
-
         """
-        carte = reserve.retirer_carte(reserve.__len__()-1)
-        self.__cartes.ajouter_carte(carte)
+        carte = reserve.retirer_carte(0)
+        self.ajouter_carte(carte)
 
     def jeter(self, indice, defausse):
         """
@@ -56,11 +55,12 @@ class Main(_ListeCartes):
         defausse : Defausse
             liste des cartes de la défausse à la fin de laquelle on ajoute la
             carte jetée
-
         """
         if not (indice > 0 and indice < self.__len__()):
-            raise ValueError(f"L'indice {indice} doit être un entier positif "
-                             "inférieur à la longueur de la main.")
+            raise ValueError(
+                f"L'indice {indice} doit être un entier positif "
+                "inférieur à la longueur de la main."
+            )
         carte = self.__cartes.retirer_carte(indice)
         defausse.ajouter_carte(carte)
 
@@ -83,7 +83,6 @@ class Main(_ListeCartes):
         Returns
         -------
         (list[Combinaison], int)
-
         """
         occurrences = {}
         combinaisons = []
@@ -91,11 +90,12 @@ class Main(_ListeCartes):
         for liste in indices_combinaisons:
             combi = Combinaison()
             for i in liste:
-                if not (isinstance(i, int) and
-                        i >= 0 and i < self.__cartes.__len__()):
-                    raise ValueError(f"L'indice {i} doit être un entier positif "
-                                     "strictement inférieur au nombre de cartes "
-                                     "dans la main.")
+                if not (isinstance(i, int) and i >= 0 and i < self.__cartes.__len__()):
+                    raise ValueError(
+                        f"L'indice {i} doit être un entier positif "
+                        "strictement inférieur au nombre de cartes "
+                        "dans la main."
+                    )
                 if occurrences[i]:
                     raise ValueError(f"La carte d'indice {i} est posée deux fois.")
                 else:

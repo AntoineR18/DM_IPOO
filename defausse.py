@@ -9,7 +9,6 @@ class Defausse(_ListeCartes):
     ----------
     cartes : _ListeCartes
         liste des cartes dans la défausse
-
     """
 
     def __init__(self, cartes):
@@ -29,33 +28,8 @@ class Defausse(_ListeCartes):
 
         reserve : _ListeCartes
             réserve à la fin de laquelle on ajoute la défausse mélangée pour la vider
-
         """
         self.melanger()
         for k in range(0, self.__len__()):
             carte = self.retirer_carte(0)
             reserve.ajouter_carte(carte)
-
-
-if __name__ == "__main__":
-
-    from carte import Carte
-    from reserve import Reserve
-
-    defausse = Defausse(
-        [Carte("Dame", "Pique"), Carte("4", "Trêfle"), Carte("As", "Pique")]
-    )
-    reserve = Reserve([Carte("3", "Carreau"), Carte("7", "Pique")])
-
-    # print(defausse.__str__())
-    # print(reserve.__str__())
-    # defausse.melanger()
-    # print(defausse.__str__())
-    # carte = defausse.retirer_carte(0)
-    # print(defausse.__str__())
-    # print(carte.__str__())
-    # reserve.ajouter_carte(carte)
-    # print(reserve.__str__())
-
-    defausse.vider(reserve)
-    print(defausse)

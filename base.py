@@ -10,7 +10,6 @@ class _ListeCartes:
     Attributes
     ----------
     cartes : list[Carte]
-
     """
 
     def __init__(self, cartes):

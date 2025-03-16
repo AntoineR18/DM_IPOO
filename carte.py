@@ -15,7 +15,6 @@ class Carte:
 
     couleur : str
         couleur de la carte
-
     """
 
     __VALEURS = [

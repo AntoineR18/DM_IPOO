@@ -9,7 +9,6 @@ class Combinaison:
     Attributes
     ----------
     cartes : tuple[Carte]
-
     """
 
     def __init__(self, cartes):
@@ -54,8 +53,6 @@ class Combinaison:
         Returns
         -------
         bool
-
-
         """
         return (
             self.__len__() == 3
@@ -79,8 +76,6 @@ class Combinaison:
         Returns
         -------
         bool
-
-
         """
         return (
             self.__len__() == 4
@@ -104,7 +99,6 @@ class Combinaison:
         Returns
         -------
         bool
-
         """
         n = self.__len__()
         if n < 3:
@@ -134,8 +128,6 @@ class Combinaison:
         Returns
         -------
         bool
-
-
         """
         return self.__est_brelan() or self.__est_carre() or self.est_sequence()
 
@@ -152,8 +144,6 @@ class Combinaison:
         Returns
         -------
         int
-
-
         """
         if not self.est_valide():
             raise ValueError("La combinaison n'est pas valide.")

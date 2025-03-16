@@ -1,19 +1,8 @@
 """Implémentation des tests pour la classe Defausse."""
 
 import pytest
-
 from defausse import Defausse
 from reserve import Reserve
-
-
-# @pytest.mark.parametrize()
-# def test_defausse_init_echec():
-#     pass
-
-
-# @pytest.mark.parametrize()
-# def test_defausse_init_success():
-#     pass
 
 
 @pytest.mark.parametrize(
@@ -50,4 +39,6 @@ def test_defausse_vider(param1, param2, reserve_attendue):
     assert defausse.__len__() == 0
     assert reserve.__len__() == r + d
     assert reserve_attendue.__eq__(Reserve(param1 + param2))
-    # le troisième assert à refaire si on a le temps
+
+
+# le troisième assert à refaire si on a le temps
