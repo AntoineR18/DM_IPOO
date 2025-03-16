@@ -109,12 +109,15 @@ class Combinaison:
         n = self.__len__()
         if n < 3:
             return False
-        if len(set([carte.valeur for carte in self.__cartes])) != 1:
+        if len(set([carte.couleur for carte in self.__cartes])) != 1:
             return False
         indices_combi = [Carte.VALEURS().index(carte.valeur) for carte in self.__cartes]
-        indices_combi.sort()  # normalement ça a changé
+        indices_combi.sort()
         return all(
             indices_combi[i] + 1 == indices_combi[i + 1] for i in range(0, n - 1)
+        ) or (
+            all(indices_combi[i] + 1 == indices_combi[i + 1] for i in range(1, n - 1))
+            and indices_combi[0] == 0
         )
 
     def est_valide(self):
@@ -156,22 +159,30 @@ class Combinaison:
             raise ValueError("La combinaison n'est pas valide.")
         points = (
             {valeur: int(valeur) for valeur in Carte.VALEURS()[1:10]}
-            + {valeur: 10 for valeur in Carte.VALEURS()[10:]}
-            + {"As": 10}
+            | {valeur: 10 for valeur in Carte.VALEURS()[10:]}
+            | {"As": 10}
         )
+        valeurs = [carte.valeur for carte in self.__cartes]
         if self.__est_brelan():
-            return 3 * points[self.__cartes[0]]
+            return 3 * points[valeurs[0]]
         elif self.__est_carre():
-            return 4 * points[self.__cartes[0]]
+            return 4 * points[valeurs[0]]
         else:
-            res = 0
-            if "As" in self.__cartes and "2" in self.__cartes:
-                for carte in self.__cartes:
-                    if carte.valeur == "As":
-                        res += 1
-                    res += points[carte]
-                return res
+            if "As" in valeurs and "2" in valeurs:
+                valeurs.pop(valeurs.index("As"))
+                return sum([points[valeur] for valeur in valeurs]) + 1
             else:
-                for carte in self.__cartes:
-                    res += points[carte]
-                return res
+                return sum([points[valeur] for valeur in valeurs])
+
+
+if __name__ == "__main__":
+
+    combi = Combinaison(
+        (
+            Carte("As", "Coeur"),
+            Carte("Valet", "Coeur"),
+            Carte("Roi", "Coeur"),
+            Carte("Dame", "Coeur"),
+        )
+    )
+    print(combi.est_sequence())

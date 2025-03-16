@@ -1,6 +1,5 @@
 """Implémentation de vérifications basiques sur le code."""
 
-
 from inspect import ismethod
 
 from base import _ListeCartes

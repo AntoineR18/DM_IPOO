@@ -62,7 +62,7 @@ class Carte:
         return Carte.__COULEURS
 
     def __str__(self):
-        return f"{self.__valeur} de {self.__couleur.lower()}"
+        return f"{self.__valeur} de {self.couleur.lower()}"
 
     def __repr__(self):
         return f"Carte('{self.__valeur}', '{self.__couleur}')"
