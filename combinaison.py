@@ -14,12 +14,10 @@ class Combinaison:
 
     def __init__(self, cartes):
         if not isinstance(cartes, tuple):
-            raise TypeError("L'objet n'est pas une combinaison.")
+            raise TypeError("L'argument 'cartes' doit être un tuple.")
         for carte in cartes:
             if not isinstance(carte, Carte):
-                raise TypeError(
-                    "Tous les éléments de la combinaison ne sont pas des cartes"
-                )
+                raise TypeError(f"{carte} doit être une carte.")
         self.__cartes = cartes
 
     @property
@@ -62,9 +60,8 @@ class Combinaison:
         return (
             self.__len__() == 3
             and len(set([carte.valeur for carte in self.__cartes])) == 1
+            and len(set([carte.couleur for carte in self.__cartes])) == 3
         )
-
-    # la dernière condition, de 'il y a trois couleurs différentes' est pas nécessaire
 
     def __est_carre(self):
         """
@@ -88,9 +85,8 @@ class Combinaison:
         return (
             self.__len__() == 4
             and len(set([carte.valeur for carte in self.__cartes])) == 1
+            and len(set([carte.couleur for carte in self.__cartes])) == 4
         )
-
-    # pareil que brelan
 
     def est_sequence(self):
         """

@@ -37,10 +37,11 @@ class Carte:
     __COULEURS = ["Pique", "Carreau", "Coeur", "Trêfle"]
 
     def __init__(self, valeur, couleur):
-        if valeur not in Carte.VALEURS():
-            raise ValueError("La valeur de la carte n existe pas.")
-        if couleur not in Carte.COULEURS():
-            raise ValueError("La couleur de la carte n existe pas.")
+        if valeur not in Carte.VALEURS() or couleur not in Carte.COULEURS():
+            raise ValueError(
+                f"La valeur de la carte doit être dans {Carte.VALEURS()}"
+                f" et sa couleur dans {Carte.COULEURS()}."
+            )
         self.__valeur = valeur
         self.__couleur = couleur
 

@@ -39,7 +39,6 @@ class _ListeCartes:
 
     def __eq__(self, other):
         return isinstance(other, _ListeCartes) and self.__cartes == other.__cartes
-        # all(carte1 == carte2 for carte1 in self.__cartes for carte2 in other.__cartes
 
     def __str__(self):
         return "[" + ", ".join(carte.__str__() for carte in self.__cartes) + "]"

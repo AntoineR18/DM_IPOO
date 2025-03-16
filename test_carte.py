@@ -36,3 +36,19 @@ def test_Carte_initialisation_parametres(params, erreur, message_erreur):
         # la solution, si ça marche pas ce serait de remplacer dans l7 et l27
         # Carte par __init__
         Carte(**params)
+
+
+@pytest.mark.parametrize(
+    "param",
+    [
+        ("Procrastiner le DM d IPOO", "Trêfle"),
+        ("7", "Galérer sur les tests"),
+        (7, "Coeur"),
+    ],
+)
+def test_carte_init_valeur_echec(param):
+    with pytest.raises(
+        ValueError,
+        match=(f"L'argument 'valeur' doit être dans {Carte.VALEURS()}"),
+    ):
+        Carte(param)

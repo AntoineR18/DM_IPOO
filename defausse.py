@@ -32,10 +32,6 @@ class Defausse(_ListeCartes):
 
         """
         self.__cartes.melanger()
-        i = 0
         for carte in self.__cartes:
             reserve.ajouter_carte(carte)
-            i += 1
-        for k in range(i-1):
-            #j'ai rajouté ce truc miteux pour que la défausse soit vidée mais je suis sure que c'est faux
-            Defausse.retirer_carte(k)
+            self.retirer_carte(id(carte))
