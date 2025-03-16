@@ -5,7 +5,6 @@ import pytest
 from reserve import Reserve
 
 
-# test d'erreur de la méthode distribuer
 @pytest.mark.parametrize(
     "params, erreur, message_erreur",
     [

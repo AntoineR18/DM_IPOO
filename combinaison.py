@@ -173,16 +173,3 @@ class Combinaison:
                 return sum([points[valeur] for valeur in valeurs]) + 1
             else:
                 return sum([points[valeur] for valeur in valeurs])
-
-
-if __name__ == "__main__":
-
-    combi = Combinaison(
-        (
-            Carte("As", "Coeur"),
-            Carte("Valet", "Coeur"),
-            Carte("Roi", "Coeur"),
-            Carte("Dame", "Coeur"),
-        )
-    )
-    print(combi.est_sequence())
