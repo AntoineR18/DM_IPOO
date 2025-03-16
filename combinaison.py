@@ -17,7 +17,9 @@ class Combinaison:
             raise TypeError("L'objet n'est pas une combinaison.")
         for carte in cartes:
             if not isinstance(carte, Carte):
-                raise TypeError("Tous les éléments de la combinaison ne sont pas des cartes")
+                raise TypeError(
+                    "Tous les éléments de la combinaison ne sont pas des cartes"
+                )
         self.__cartes = cartes
 
     @property
@@ -25,10 +27,12 @@ class Combinaison:
         return deepcopy(self.__cartes)
 
     def __eq__(self, other):
-        return (isinstance(other, Combinaison)
-                and (self.__len__() + other.__len__() == 0
-                     or (self.est_valide() and other.est_valide()
-                         and self.cartes == other.cartes)))
+        return isinstance(other, Combinaison) and (
+            self.__len__() + other.__len__() == 0
+            or (
+                self.est_valide() and other.est_valide() and self.cartes == other.cartes
+            )
+        )
 
     def __str__(self):
         return "(" + ", ".join([f"{carte.__str__()}" for carte in self.__cartes]) + ")"
@@ -36,9 +40,7 @@ class Combinaison:
     def __len__(self):
         return len(self.__cartes)
 
-#j'ai enlevé les __ devant ces méthodes parce que ça passait pas les tests, apparemment c'est réservé aux méthodes spéciales
-
-    def est_brelan(self):
+    def __est_brelan(self):
         """
         La méthode privée est_brelan() détermine si la combinaison est un brelan.
         Une combinaison est un brelan si et seulement si :
@@ -57,11 +59,14 @@ class Combinaison:
 
 
         """
-        return (self.__len__() == 3
-                and len(set([carte.valeur for carte in self.__cartes])) == 1)
-    #la dernière condition, de 'il y a trois couleurs différentes" est pas nécessaire
+        return (
+            self.__len__() == 3
+            and len(set([carte.valeur for carte in self.__cartes])) == 1
+        )
 
-    def est_carre(self):
+    # la dernière condition, de 'il y a trois couleurs différentes' est pas nécessaire
+
+    def __est_carre(self):
         """
         La méthode privée est_carre() détermine si la combinaison est un carré.
         Une combinaison est un carré si et seulement si :
@@ -80,9 +85,12 @@ class Combinaison:
 
 
         """
-        return (self.__len__() == 4
-                and len(set([carte.valeur for carte in self.__cartes])) == 1)
-    #pareil que brelan
+        return (
+            self.__len__() == 4
+            and len(set([carte.valeur for carte in self.__cartes])) == 1
+        )
+
+    # pareil que brelan
 
     def est_sequence(self):
         """
@@ -109,7 +117,9 @@ class Combinaison:
             return False
         indices_combi = [Carte.VALEURS().index(carte.valeur) for carte in self.__cartes]
         indices_combi.sort()  # normalement ça a changé
-        return all(indices_combi[i]+1 == indices_combi[i+1] for i in range(0, n-1))
+        return all(
+            indices_combi[i] + 1 == indices_combi[i + 1] for i in range(0, n - 1)
+        )
 
     def est_valide(self):
         """
@@ -148,17 +158,20 @@ class Combinaison:
         """
         if not self.est_valide():
             raise ValueError("La combinaison n'est pas valide.")
-        points = ({valeur: int(valeur) for valeur in Carte.VALEURS()[1:10]} +
-                  {valeur: 10 for valeur in Carte.VALEURS()[10:]} + {'As': 10})
+        points = (
+            {valeur: int(valeur) for valeur in Carte.VALEURS()[1:10]}
+            + {valeur: 10 for valeur in Carte.VALEURS()[10:]}
+            + {"As": 10}
+        )
         if self.__est_brelan():
-            return 3*points[self.__cartes[0]]
+            return 3 * points[self.__cartes[0]]
         elif self.__est_carre():
-            return 4*points[self.__cartes[0]]
+            return 4 * points[self.__cartes[0]]
         else:
             res = 0
-            if 'As' in self.__cartes and '2' in self.__cartes:
+            if "As" in self.__cartes and "2" in self.__cartes:
                 for carte in self.__cartes:
-                    if carte.valeur == 'As':
+                    if carte.valeur == "As":
                         res += 1
                     res += points[carte]
                 return res

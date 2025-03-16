@@ -20,14 +20,14 @@ from carte import Carte
         (
             {"valeur": "procrastiner_le_DM_d_IPOO", "couleur": "Trêfle"},
             ValueError,
-            "La valeur de la carte n existe pas."
+            "La valeur de la carte n'existe pas.",
         ),
         (
             {"valeur": "2", "couleur": "coeur"},
             ValueError,
-            "La couleur de la carte n existe pas."
-        )
-    ]
+            "La couleur de la carte n'existe pas.",
+        ),
+    ],
 )
 def test_Carte_initialisation_parametres(params, erreur, message_erreur):
     # je suis pas du tout sûre de cette manière de faire des test parce que

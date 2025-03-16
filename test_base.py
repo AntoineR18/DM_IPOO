@@ -1,6 +1,5 @@
 """Implémentation des tests pour la classe _ListeCartes."""
 
-
 from copy import copy
 
 import pytest

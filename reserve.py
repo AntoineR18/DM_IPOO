@@ -16,7 +16,8 @@ class Reserve(_ListeCartes):
     def __init__(self, cartes):
         super().__init__(cartes)
 
-    def distribuer(self, n_joueurs, idx_premier_joueur, n_cartes="14/15"):  #j'ai rajouté la valeur par défaut
+    def distribuer(self, n_joueurs, idx_premier_joueur, n_cartes="14/15"):
+        # j'ai rajouté la valeur par défaut
         """
         La méthode publique distribuer() de la classe Reserve permet de
         distribuer les cartes aux joueur·euse·s en début de partie.

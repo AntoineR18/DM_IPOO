@@ -17,6 +17,25 @@ class Carte:
         couleur de la carte
 
     """
+
+    __VALEURS = [
+        "As",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "Valet",
+        "Dame",
+        "Roi",
+    ]
+
+    __COULEURS = ["Pique", "Carreau", "Coeur", "Trêfle"]
+
     def __init__(self, valeur, couleur):
         if valeur not in Carte.VALEURS():
             raise ValueError("La valeur de la carte n existe pas.")
@@ -35,12 +54,11 @@ class Carte:
 
     @classmethod
     def VALEURS(cls):
-        return ['As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Dame',
-                 'Roi']
+        return Carte.__VALEURS
 
     @classmethod
     def COULEURS(cls):
-        return ['Pique', 'Carreau', 'Coeur', 'Trêfle']
+        return Carte.__COULEURS
 
     def __str__(self):
         return f"{self.__valeur} de {self.__couleur.lower()}"
@@ -49,9 +67,11 @@ class Carte:
         return f"Carte('{self.__valeur}', '{self.__couleur}')"
 
     def __eq__(self, other):
-        return (isinstance(other, Carte)
-                and self.valeur == other.valeur
-                and self.couleur == other.couleur)
+        return (
+            isinstance(other, Carte)
+            and self.valeur == other.valeur
+            and self.couleur == other.couleur
+        )
 
     def __hash__(self):
         return hash(self.__repr__())
